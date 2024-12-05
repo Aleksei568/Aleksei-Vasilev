@@ -1,0 +1,19 @@
+def calculator ():
+    try:
+        number1 = float(input('ввести первое число:'))
+        user = input(('+', '-', '*', '/'))
+        number2 = float(input('ввести второе число:'))
+
+        if user == '+':
+            result = number1 + number2
+        elif user == '-':
+            result = number1 - number2
+        elif user == '*':
+            result = number1 * number2
+        elif user == '/':
+            result = number1 / number2
+            if number2 == 0:
+                print('Ошибка! Делить на 0 нельзя!')
+        print(f'Результат: [result]')
+    except ValueError:
+        print('Ошибка. Введите число')
