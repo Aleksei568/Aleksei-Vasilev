@@ -14,6 +14,6 @@ def calculator ():
             result = number1 / number2
             if number2 == 0:
                 print('Ошибка! Делить на 0 нельзя!')
-        print(f'Результат: [result]')
+        print(f'Результат: {result}')
     except ValueError:
         print('Ошибка. Введите число')
