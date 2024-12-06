@@ -3,21 +3,27 @@ def sum_numbers_and_count_strings(data):
     total_length = 0
 
     for item in data:
-        if isinstance(item, int):
+        if isinstance(item, (int, float)):  
             total_sum += item
         elif isinstance(item, str):
             total_length += len(item)
-        elif isinstance(item, list) or isinstance(item, tuple):
+        elif isinstance(item, (list, tuple, set)): 
             sub_sum, sub_length = sum_numbers_and_count_strings(item)
             total_sum += sub_sum
             total_length += sub_length
         elif isinstance(item, dict):
-            for value in item.values():
-                if isinstance(value, int):
-                    total_sum += value
-                elif isinstance(value, str):
-                    total_length += len(value)
-                elif isinstance(value, list) or isinstance(value, tuple):
+            for key, value in item.items():
+                if isinstance(key, (int, float, str)): 
+                    if isinstance(key, str):
+                        total_length += len(key)
+                    else:
+                        total_sum += key
+                if isinstance(value, (int, float, str)): 
+                    if isinstance(value, str):
+                        total_length += len(value)
+                    else:
+                        total_sum += value
+                elif isinstance(value, (list, tuple, set, dict)): 
                     sub_sum, sub_length = sum_numbers_and_count_strings(value)
                     total_sum += sub_sum
                     total_length += sub_length
