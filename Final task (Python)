@@ -1,1 +1,25 @@
+class Car:
+    def __init__(self, model, year, engine, price, mileage):
+        self.model = model
+        self.year = year
+        self.engine = engine
+        self.price = price
+        self.mileage = mileage
+        self.wheels = 4
+        print('Данные автомобиля:')
+
+
+    def description (self):
+        return (f'Модель: {self.model}, Год: {self.year}, Двигатель: {self.engine}, Цена: {self.price},'
+                f'Пробег: {self.mileage}, Количество колес: {self.wheels}')
+car = Car('LADA Vesta', 2024, 1.8 , 2100000, 4)
+print(car.description())
+
+class Truck(Car):
+    def __init__(self, model, year, engine, price, mileage):
+        super().__init__(model, year, engine, price, mileage)
+        self.wheels = 8
+      
+truck = Truck('Mersedes Actros', 2019, 6.5, 7500000, 800000)
+print(truck.description())
 
