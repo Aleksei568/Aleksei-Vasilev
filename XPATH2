@@ -1,1 +1,18 @@
-
+from selenium import webdriver
+from time import sleep
+from selenium.webdriver.common.by import By
+driver = webdriver.Chrome()
+try:
+    driver.get('https://www.lambdatest.com/selenium-playground/checkbox-demo')
+    sleep(2)
+    driver.maximize_window()
+    input_field = driver.find_element(By.ID, 'box')
+    sleep(2)
+    input_field.send_keys('выберите все варианты')
+    sleep(2)
+    button = driver.find_element(By.ID, "box")
+    sleep(2)
+    button.click()
+    sleep(3)
+finally:
+    driver.quit()
