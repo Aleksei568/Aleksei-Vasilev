@@ -10,7 +10,7 @@ try:
     sleep(2)
     input_field.send_keys('example_wrapper')
     sleep(2)
-    button = driver.find_element(By.Class, "copy")
+    button = driver.find_element(By.XPATH, '//*[@id="example_wrapper"]/div[1]/a[1]')
     sleep(2)
     button.click()
     sleep(3)
