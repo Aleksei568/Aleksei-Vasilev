@@ -1,0 +1,33 @@
+from selenium import webdriver
+from time import sleep
+from selenium.webdriver.common.by import By
+
+file = open('log.txt', 'w')
+
+driver = webdriver.Chrome()
+driver.get('http://www.saucedemo.com/')
+driver.maximize_window()
+user_pass = driver.find_element(By.XPATH, '//*[@id="password"]')
+password = 'secret_sauce5'
+user_pass.send_keys(password)
+file.write('Success write fake_login\n')
+user_name = driver.find_element(By.XPATH, '//*[@id="user-name"]')
+login = 'standard_user'
+user_name.send_keys(login)
+file.write('Success write login\n')
+login_butt = driver.find_element(By.XPATH, '//*[@id="login-button"]')
+login_butt.click()
+file.write('Success write login\n')
+
+sleep(2)
+
+
+def test_fake_login_label():
+    correct_text = 'Epic sadface: Username and password do not match any user in this service'
+    current_text = driver.find_element(By.XPATH, '//*[@id="login_button_container"]/div/form/div[3]/h3')
+    assert correct_text == current_text.text, 'test_fake_login_label is Failed'
+    file.write('test_fake_login_label is OK')
+
+
+
+    test_fake_login_label()
