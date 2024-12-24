@@ -1,0 +1,146 @@
+from selenium import webdriver
+from time import sleep
+from selenium.webdriver.common.by import By
+
+
+
+file = open('log.txt', 'w')
+
+driver = webdriver.Chrome()
+driver.get('http://www.saucedemo.com/')
+driver.maximize_window()
+sleep(2)
+
+def real_login():
+    user_name = driver.find_element(By.XPATH, '//*[@id="user-name"]')
+    login = 'standard_user'
+    user_name.send_keys(login)
+    file.write('Success write login\n')
+    sleep(2)
+
+    user_pass = driver.find_element(By.XPATH, '//*[@id="password"]')
+    password = 'secret_sauce'
+    user_pass.send_keys(password)
+    file.write('Success write password\n')
+    sleep(2)
+
+    login_butt = driver.find_element(By.XPATH, '//*[@id="login-button"]')
+    login_butt.click()
+    file.write('Success click login_butt\n')
+    sleep(2)
+
+real_login()
+
+def add_good_to_cart():         # Добавляем товары в корзину
+    add_to_cart_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-backpack"]')
+    add_to_cart_button.click()
+    sleep(2)
+    file.write('Success add  sauce-labs-backpack to cart\n')
+
+    add_to_cart_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-fleece-jacket"]')
+    add_to_cart_button.click()
+    sleep(2)
+    file.write('Success add sauce-labs-fleece-jacket to cart\n')
+
+    add_to_cart_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bolt-t-shirt"]')
+    add_to_cart_button.click()
+    sleep(2)
+    file.write('Success add sauce-labs-bolt-t-shirt to cart\n')
+
+add_good_to_cart()
+
+def shopping_cart():            #Открываем корзину
+    cart = driver.find_element(By.XPATH, '//*[@id="shopping_cart_container"]/a')
+    cart.click()
+    sleep(2)
+    file.write('Success open cart\n')
+
+shopping_cart()
+
+def goods_match_cart_and_page():       #Сравниваем соответствуют ли названия товаров
+    product_name = driver.find_element(By.XPATH, '//*[@id="item_4_title_link"]/div')
+    shopping_cart_name = driver.find_element(By.XPATH, '//*[@id="item_4_title_link"]/div')
+    if product_name == shopping_cart_name:
+        print('Рюкзак в корзине соответствует рюкзаку на странице')
+    else:
+        print('Товар в корзине не соответсвует товару на странице')
+
+    file.write('Success Backpack in shopping cart match backpack on front page\n')
+    sleep(2)
+
+    product_name = driver.find_element(By.XPATH, '//*[@id="item_5_title_link"]/div')
+    shopping_cart_name = driver.find_element(By.XPATH, '//*[@id="item_5_title_link"]/div')
+    if product_name == shopping_cart_name:
+        print('Флисовая куртка в корзине соответствует куртке на странице')
+    else:
+        print('Товар в корзине не соответсвует товару на странице')
+
+    file.write('Success Fleece Jacket in shopping cart match price on front page\n')
+    sleep(2)
+
+    product_name = driver.find_element(By.XPATH, '//*[@id="item_1_title_link"]/div')
+    shopping_cart_name = driver.find_element(By.XPATH, '//*[@id="item_1_title_link"]/div')
+    if product_name == shopping_cart_name:
+        print('Черная футболка в корзине соответствует футболке на странице')
+    else:
+        print('Товар в корзине не соответсвует товару на странице')
+
+    file.write('Success Black T-shirt in shopping cart match  on front page\n')
+    sleep(2)
+
+
+goods_match_cart_and_page()
+
+#def continue_shopping_button():          #Нажимаем на кнопку "Вернуться на главную страницу"
+    #continue_shopping = driver.find_element(By.XPATH, '//*[@id="continue-shopping"]')
+    #continue_shopping.click()
+    #sleep(2)
+    #file.write('Success return to main page\n')
+
+#continue_shopping_button()
+
+
+def checkout_button():                    #Нажимаем на кнопку "Оформить заказ"
+    checkout_button = driver.find_element(By.XPATH, '//*[@id="checkout"]')
+    checkout_button.click()
+    sleep(2)
+
+    file.write('Success click on checkout button and go next page\n')
+
+checkout_button()
+
+def checkout_information():         #Заполяем поля для оформления заказа
+    first_name = driver.find_element(By.XPATH, '//*[@id="first-name"]')
+    name = 'first_name'
+    first_name.send_keys(name)
+    file.write('Success write name\n')
+    sleep(2)
+
+    last_name = driver.find_element(By.XPATH, '//*[@id="last-name"]')
+    surname = 'last-name'
+    last_name.send_keys(surname)
+    file.write('Success write surname\n')
+    sleep(2)
+
+    post_code_element = driver.find_element(By.XPATH, '//*[@id="postal-code"]')
+    post_code = '123456789'
+    post_code_element.send_keys(post_code)
+    file.write('Success write post_code\n')
+    sleep(2)
+
+checkout_information()
+
+                                    # Проверяем общую стоимость включая налог
+prices  = [15.99, 49.99, 29.99, 7.68]
+total_cost = sum(prices)
+file.write('Success write total_price = 103.65\n')
+
+print('Общая стоимость товаров: {:.2f}'.format(total_cost))
+
+def finish_button():
+  
+
+
+
+file.close()
+driver.quit()
