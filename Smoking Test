@@ -138,6 +138,13 @@ file.write('Success write total_price = 103.65\n')
 print('Общая стоимость товаров: {:.2f}'.format(total_cost))
 
 def finish_button():
+    button = driver.find_element(By.XPATH, '//*[@id="finish"]')
+    button.click()
+    sleep(2)
+    file.write('Success write redirect to confirmation notice page')
+
+
+finish_button()
   
 
 
