@@ -2,8 +2,6 @@ from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.by import By
 
-
-
 file = open('log.txt', 'w')
 
 driver = webdriver.Chrome()
@@ -145,29 +143,22 @@ file.write('Success write total_price = 103.65\n')
 
 print('Общая стоимость товаров: {:.2f}'.format(total_cost))
 
-def cancel_button():
-    button = driver.find_element(By.XPATH, '//*[@id="cancel"]')
-    button.click()
-    sleep(2)
-    file.write('Success write redirect to shopping_cart page')
-
-
-cancel_button()
-
 def finish_button():
     button = driver.find_element(By.XPATH, '//*[@id="finish"]')
     button.click()
     file.write('Success write redirect to order confirmation page')
+    sleep(5)
 finish_button()
 
-
+menu_button = driver.find_element(By.XPATH, '//*[@id="react-burger-menu-btn"]')
+menu_button.click()
+file.write('Success write menu button active')
+sleep(5)
+logout_button = driver.find_element(By.XPATH, '//*[@id="logout_sidebar_link"]')
+logout_button.click()
+file.write('Success write logged out from the page')
+sleep(5)
 
 file.close()
 driver.quit()
-
-
-  
-
-
-
 
