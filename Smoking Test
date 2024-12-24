@@ -130,6 +130,14 @@ def checkout_information():         #Заполяем поля для оформ
 
 checkout_information()
 
+def continue_button():
+    button = driver.find_element(By.XPATH, '//*[@id="continue"]')
+    button.click()
+    sleep(2)
+    file.write('Success write continue on next page')
+continue_button()
+
+
                                     # Проверяем общую стоимость включая налог
 prices  = [15.99, 49.99, 29.99, 7.68]
 total_cost = sum(prices)
@@ -137,17 +145,29 @@ file.write('Success write total_price = 103.65\n')
 
 print('Общая стоимость товаров: {:.2f}'.format(total_cost))
 
+def cancel_button():
+    button = driver.find_element(By.XPATH, '//*[@id="cancel"]')
+    button.click()
+    sleep(2)
+    file.write('Success write redirect to shopping_cart page')
+
+
+cancel_button()
+
 def finish_button():
     button = driver.find_element(By.XPATH, '//*[@id="finish"]')
     button.click()
-    sleep(2)
-    file.write('Success write redirect to confirmation notice page')
-
-
+    file.write('Success write redirect to order confirmation page')
 finish_button()
-  
 
 
 
 file.close()
 driver.quit()
+
+
+  
+
+
+
+
