@@ -1,1 +1,23 @@
+from selenium import webdriver
+from time import sleep
+from selenium.webdriver.common.by import By
 
+
+file = open('log.txt', 'w')
+driver = webdriver.Chrome()
+
+driver.maximize_window()
+driver.get('https://demoqa.com/checkbox')
+
+main_drop_list = driver.find_element(By.XPATH, '//button[@title="Toggle"]')
+main_drop_list.click()
+file.write('Success write drop down list open')
+sleep(3)
+main_check_box = driver.find_element(By.XPATH, '//*[@id="tree-node"]/ol/li/span/label/span[1]')
+main_check_box.click()
+file.write('Success check mark inside check box')
+sleep(2)
+
+
+
+driver.quit()
