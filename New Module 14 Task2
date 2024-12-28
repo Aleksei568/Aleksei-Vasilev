@@ -1,1 +1,23 @@
+from selenium import webdriver
+from time import sleep
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
+file = open('log.txt', 'w')
+driver = webdriver.Chrome()
+
+driver.get('https://demoqa.com/radio-button')
+driver.maximize_window()
+sleep(2)
+
+radio_button_YES = driver.find_element(By.XPATH, '//*[@id="app"]/div/div/div/div[2]/div[2]/div[2]/label')
+radio_button_YES.click()
+file.write('Success write radio button selected')
+sleep(2)
+
+try:
+    radio_button_YES = driver.find_element(By.XPATH, '//*[@id="app"]/div/div/div/div[2]/div[2]/div[2]/label')
+    print('Радио кнопка существует')
+except NoSuchElementException:
+    print('Такой кнопки не существует')
+driver.quit()
