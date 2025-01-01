@@ -1,0 +1,23 @@
+from selenium import webdriver
+from time import sleep
+from datetime import datetime, timedelta
+from selenium.webdriver.common.by import By
+from selenium.webdriver import Keys
+import webbrowser
+
+
+file = open('log.txt', 'w')
+driver = webdriver.Chrome()
+
+driver.maximize_window()
+driver.get('https://demoqa.com/date-picker')
+sleep(5)
+
+date_input = driver.find_element(By.XPATH, '//*[@id="dateAndTimePickerInput"]')
+date_input.send_keys(Keys.CONTROL + 'a')
+date_input.send_keys(Keys.DELETE)
+current_date = datetime.now().strftime('%B %d, %Y %I %M %p')
+date_input.send_keys(current_date)
+file.write('Success when date is in the field\n')
+sleep(10)
+driver.quit()
